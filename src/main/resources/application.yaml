@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: invoices
+
+datasources:
+  url: jdbc:h2:mem:invoicesdb
+  diver-class-name: org.h2.Driver
+  username: admin
+  password: admin
+
+h2:
+  console:
+    enabled: update
+  show-sql: true
