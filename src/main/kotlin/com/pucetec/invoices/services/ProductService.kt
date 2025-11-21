@@ -5,26 +5,32 @@ import com.pucetec.invoices.models.entities.Product
 import com.pucetec.invoices.repositories.ProductRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-
+import org.slf4j.LoggerFactory
 
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
-){
-    open fun findAll(): List<Product>{
+) {
+
+    private val logger = LoggerFactory.getLogger(ProductService::class.java)
+
+    fun findAll(): List<Product> {
         return productRepository.findAll()
     }
-    fun findById(id: Long): Product?{
+
+    fun findById(id: Long): Product {
         val product = productRepository.findByIdOrNull(id)
-        if (product == null){
+
+        if (product == null) {
             logger.warn("Product with ID $id not found")
-            throw InvoiceEntityNotFoundException("Product: $id not found")
-        }else
-            logger.info("Product with ID $id is found")
-            return product
+            throw EntityNotFound("Product with ID $id not found")
+        }
+
+        logger.info("Product with ID $id found")
+        return product
     }
 
-    fun save(product: Product): Product{
+    fun save(product: Product): Product {
         return productRepository.save(product)
     }
 }

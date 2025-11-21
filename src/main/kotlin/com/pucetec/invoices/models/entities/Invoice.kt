@@ -17,7 +17,7 @@ data class Invoice(
     @Column(name= "total_before_taxes")
     val totalBeforeTaxes: Double = 0.0,
     val taxes: Double = 0.0,
-    @Column(name= "total_before_taxes")
+    @Column(name= "total_after_taxes")
     val totalAfterTaxes: Double = 0.0,
 
     //1 Invoice puede tener muchos invoice details - en este apartado se coloca
