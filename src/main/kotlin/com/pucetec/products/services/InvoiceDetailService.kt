@@ -31,4 +31,5 @@ class InvoiceDetailService(
 
         return invoiceDetailMapper.toResponse(savedEntity)
     }
+
 }
