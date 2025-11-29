@@ -1,0 +1,24 @@
+package com.pucetec.products.services
+
+import com.pucetec.products.mappers.InvoiceMapper
+import com.pucetec.products.models.requests.InvoiceRequest
+import com.pucetec.products.models.responses.InvoiceResponse
+import com.pucetec.products.repositories.InvoiceRepository
+import org.springframework.stereotype.Service
+
+@Service
+class InvoiceService(
+    private val invoiceRepository: InvoiceRepository,
+    private val invoiceMapper: InvoiceMapper
+){
+    fun save(request: InvoiceRequest): InvoiceResponse {
+        val entity = invoiceMapper.toEntity(request)
+        val savedInvoice = invoiceRepository.save(entity)
+        return invoiceMapper.toResponse(savedInvoice)
+    }
+
+    fun findAll(): List<InvoiceResponse> {
+        return invoiceRepository.findAll().map { invoiceMapper.toResponse(it) }
+    }
+
+}
